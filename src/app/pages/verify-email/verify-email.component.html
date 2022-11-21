@@ -1,0 +1,25 @@
+<div class="container">
+  <div
+  class="p-3 text-center d-flex flex-column align-items-center justify-content-center"
+    *ngIf="authService.userData as user"
+  >
+    <mat-card class="d-flex flex-column align-items-center justify-content-center w-75">
+      <mat-card-header><h2>Confirm Your Email Address</h2></mat-card-header>
+        <p class="text-center">
+          We have sent a confirmation email to
+          <strong class="mat-pink">{{ user.email }}</strong
+          >
+        </p>
+          Visit your mail account and please confirm your email.
+          <button
+            mat-raised-button
+            type="submit"
+            class="mat-pink my-2"
+            (click)="authService.SendVerificationMail()"
+          >
+            Resend Verification Email
+          </button>
+        <mat-card-footer class="p-3"> Note: Check your email even in spam. </mat-card-footer>
+    </mat-card>
+  </div>
+</div>

@@ -1,0 +1,133 @@
+<div class="container table-responsive">
+  <mat-card>
+    <mat-form-field appearance="fill">
+      <mat-label class="text-dark">Filter</mat-label>
+      <input
+        matInput
+        (keyup)="applyFilter($event)"
+        placeholder="Occasion"
+        #input
+      />
+    </mat-form-field>
+  </mat-card>
+
+  <div class="mat-elevation-z8">
+    <mat-paginator
+      [pageSizeOptions]="[5, 10, 25, 100]"
+      aria-label="Select page of memories"
+    ></mat-paginator>
+    <mat-table mat-table [dataSource]="dataSource" matSort>
+      <!-- Image Column -->
+      <ng-container matColumnDef="image">
+        <th
+          mat-header-cell
+          *matHeaderCellDef
+          mat-sort-header
+          class="text-center bold h4"
+        >
+          Image
+        </th>
+        <td mat-cell *matCellDef="let row" class="text-center p-2">
+          <a href="{{ row.image }}" download="{{ row.image }}">
+            <img
+              src="{{ row.image }}"
+              alt="{{ row.occasion }}"
+              class="img-fluid rounded-start"
+              style="height: 250px; width: 250px"
+          /></a>
+        </td>
+      </ng-container>
+
+      <!-- Date Column -->
+      <ng-container matColumnDef="postedby">
+        <th
+          mat-header-cell
+          *matHeaderCellDef
+          mat-sort-header
+          class="text-center bold h4"
+        >
+          Posted By
+        </th>
+        <td mat-cell *matCellDef="let row" class="text-center p-2">
+          {{ row.email }}
+        </td>
+      </ng-container>
+
+      <!-- Date Column -->
+      <ng-container matColumnDef="date">
+        <th
+          mat-header-cell
+          *matHeaderCellDef
+          mat-sort-header
+          class="text-center bold h4"
+        >
+          Date
+        </th>
+        <td mat-cell *matCellDef="let row" class="text-center p-2">
+          {{ row.date.split("00:00:00")[0] }}
+        </td>
+      </ng-container>
+
+      <!-- Occasion Column -->
+      <ng-container matColumnDef="occasion">
+        <th
+          mat-header-cell
+          *matHeaderCellDef
+          mat-sort-header
+          class="text-center bold h4"
+        >
+          Occasion
+        </th>
+        <td mat-cell *matCellDef="let row" class="p-2">
+          {{ row.occasion }}
+        </td>
+      </ng-container>
+
+      <!-- Buttons -->
+      <ng-container matColumnDef="buttons">
+        <th mat-header-cell *matHeaderCellDef class="text-center bold h4">
+          Options
+        </th>
+        <td mat-cell *matCellDef="let row" class="p-2">
+          <button mat-icon-button class="bg-dark m-2" matTooltip="Detail">
+            <i class="bi bi-info-circle-fill"></i>
+          </button>
+          <button mat-icon-button class="bg-info m-2" matTooltip="View" (click)="OpenImageDialog(row)">
+            <i class="bi bi-eye-fill"></i>
+          </button>
+          <!-- <button
+            mat-icon-button
+            class="bg-info m-2"
+            matTooltip="Download Image"
+            (click)="downloadImage(row)"
+          >
+            <i class="bi bi-download"></i>
+          </button> -->
+          <button
+            mat-icon-button
+            class="bg-danger m-2"
+            matTooltip="Delete"
+            (click)="openDialog(row.id)"
+          >
+            <i class="bi bi-trash3"></i>
+          </button>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+
+      <!-- Row shown when there is no matching data. -->
+      <tr class="mat-row" *matNoDataRow>
+        <td class="mat-cell" colspan="5" class="text-center text-light h4">
+          No data matching the filter " {{ input.value }} " (or) No Data Found!
+        </td>
+      </tr>
+    </mat-table>
+
+    <mat-paginator
+      [pageSizeOptions]="[5, 10, 25, 100]"
+      aria-label="Select page of memories"
+    ></mat-paginator>
+  </div>
+</div>

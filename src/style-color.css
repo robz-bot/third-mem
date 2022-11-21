@@ -1,0 +1,15 @@
+:root{
+  --mat-pink:#880061
+}
+
+.mat-flat-button.mat-pink,
+.mat-raised-button.mat-pink,
+.mat-fab.mat-pink,
+.mat-mini-fab.mat-pink, .mat-bg-pink {
+  background-color: var(--mat-pink);
+  color: white;
+}
+
+.mat-pink{
+  color: var(--mat-pink);
+}

@@ -1,0 +1,8 @@
+<h1 mat-dialog-title class="text-center">Delete Memory <i class="bi bi-emoji-frown"></i></h1>
+<div mat-dialog-content class="text-center">
+  Would you like to delete this Memory?
+</div>
+<div mat-dialog-actions class="d-flex align-items-center justify-content-center">
+  <button mat-button mat-dialog-close class="bg-info">No</button>
+  <button mat-button mat-dialog-close cdkFocusInitial (click)="deleteNewMem()" class="bg-danger">Ok</button>
+</div>

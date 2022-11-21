@@ -1,0 +1,94 @@
+<app-header></app-header>
+<div class="container my-5">
+  <div class="row d-flex align-items-center justify-content-center">
+    <div class="col-sm-12 col-md-6 col-lg-6 text-center shadow p-3 rounded">
+      <img [src]="imgSrc" width="500px" height="400px" />
+    </div>
+    <mat-card class="col-sm-12 col-md-6 col-lg-6 mat-card-form">
+      <mat-card-header class="d-flex align-items-center justify-content-center">
+        <mat-card-title class="text-dark"
+          ><h2>New Memory <i class="bi bi-camera"></i></h2
+        ></mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <form
+          class="text-dark d-flex flex-column"
+          [formGroup]="formTemplate"
+          (submit)="onSubmit(formTemplate.value)"
+        >
+          <mat-form-field appearance="outline" class="my-2">
+            <mat-label class="text-dark"
+              >Select Pic (Accept only PNG, JPEG Format)</mat-label
+            >
+            <input type="text" readonly matInput #selFile />
+            <input
+              type="file"
+              multiple
+              #f_input
+              formControlName="imageUrl"
+              (change)="showPreview($event)"
+              accept="image/png, image/jpeg"
+            />
+            <!-- <mat-icon>attach_file</mat-icon> -->
+          </mat-form-field>
+          <mat-form-field class="example-full-width" appearance="fill">
+            <mat-label class="text-dark">Occasion</mat-label>
+            <input
+              type="text"
+              matInput
+              formControlName="occasion"
+              [matAutocomplete]="auto"
+            />
+            <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+              <mat-option
+                *ngFor="let option of filteredOptions | async"
+                [value]="option"
+              >
+                {{ option }}
+              </mat-option>
+            </mat-autocomplete>
+          </mat-form-field>
+          <mat-form-field appearance="fill">
+            <mat-label class="text-dark">Choose a date</mat-label>
+            <input
+              matInput
+              [matDatepicker]="datepicker"
+              formControlName="date"
+            />
+            <mat-hint class="text-dark">MM/DD/YYYY</mat-hint>
+            <mat-datepicker-toggle
+              matIconPrefix
+              [for]="datepicker"
+            ></mat-datepicker-toggle>
+            <mat-datepicker #datepicker>
+              <mat-datepicker-actions>
+                <button mat-button matDatepickerCancel>Cancel</button>
+                <button mat-raised-button color="primary" matDatepickerApply>
+                  Apply
+                </button>
+              </mat-datepicker-actions>
+            </mat-datepicker>
+          </mat-form-field>
+          <div class="row">
+            <div class="col-sm-12 col-md-6 col-lg-6 text-center">
+              <button mat-raised-button type="submit" class="mat-pink my-2">
+                Create Memory
+                <span class="spinner-border mx-2" *ngIf="loader"></span>
+              </button>
+            </div>
+            <div class="col-sm-12 col-md-6 col-lg-6 text-center">
+              <button
+                mat-raised-button
+                type="submit"
+                class="bg-dark my-2"
+                (click)="resetForm()"
+              >
+                Reset
+              </button>
+            </div>
+          </div>
+        </form>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>

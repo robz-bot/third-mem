@@ -1,0 +1,35 @@
+<mat-toolbar class="mat-bg-pink">
+  <h1 class="card-title text-center">
+    <i class="bi bi-badge-tm-fill"></i> Third Mem
+    <i class="bi bi-image-alt"></i>
+  </h1>
+
+  <span class="example-spacer"></span>
+  <button
+    mat-icon-button
+    class="example-icon favorite-icon"
+    matTooltip="Home"
+    aria-label="Example icon-button with heart icon"
+    routerLink="/dashboard"
+  >
+    <mat-icon>home</mat-icon>
+  </button>
+  <button
+    mat-icon-button
+    class="example-icon favorite-icon"
+    matTooltip="New Memory"
+    aria-label="Example icon-button with heart icon"
+    routerLink="/new-mem"
+  >
+    <mat-icon>image</mat-icon>
+  </button>
+  <button
+    mat-icon-button
+    class="example-icon favorite-icon"
+    matTooltip="Sign Out"
+    aria-label="Example icon-button with heart icon"
+    (click)="signOut()"
+  >
+    <mat-icon>logout</mat-icon>
+  </button>
+</mat-toolbar>

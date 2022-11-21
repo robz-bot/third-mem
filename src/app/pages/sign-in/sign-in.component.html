@@ -1,0 +1,90 @@
+
+<div class="container h-100 d-flex align-items-center justify-content-center">
+
+  <div class="row">
+    <div class="col-sm-12 col-md-6 col-xl-6">
+      <mat-card class="d-flex flex-column align-items-center">
+        <img
+          mat-card-image
+          src="assets/img/Team lunch.png"
+          alt="Photo of a Shiba Inu"
+        />
+      </mat-card>
+    </div>
+    <div class="col-sm-12 col-md-6 col-xl-6">
+      <mat-card
+        flex="flex"
+        flex-gt-sm="50"
+        flex-gt-md="33"
+        class="d-flex flex-column align-items-center"
+      >
+        <mat-card-header
+          class="d-flex flex-column mat-card-header"
+          style="color: #880061"
+        >
+          <h1 class="card-title mt-3 text-center">
+            <i class="bi bi-badge-tm-fill"></i> Third Mem
+            <i class="bi bi-image-alt"></i>
+          </h1>
+          <p class="text-center">
+            <mat-icon
+              aria-hidden="false"
+              aria-label="Example home icon"
+              fontIcon="account"
+            ></mat-icon>
+            Login Account. Let's Collabrate <i class="bi bi-emoji-smile-fill"></i>
+          </p>
+        </mat-card-header>
+        <mat-card-content>
+          <mat-grid-list cols="2" rowHeight="2:1">
+            <mat-grid-tile>
+              <div class="d-flex flex-column">
+                <mat-form-field appearance="fill">
+                  <mat-label>Enter your email</mat-label>
+                  <input
+                    matInput
+                    placeholder="username@domain.com"
+                    #email
+                    required
+                  />
+                </mat-form-field>
+                <mat-form-field appearance="fill">
+                  <mat-label>Enter your password</mat-label>
+                  <input
+                    matInput
+                    [type]="hide ? 'password' : 'text'"
+                    #password
+                  />
+                  <button
+                    mat-icon-button
+                    matSuffix
+                    (click)="hide = !hide"
+                    [attr.aria-label]="'Hide password'"
+                    [attr.aria-pressed]="hide"
+                  >
+                    <mat-icon>{{
+                      hide ? "visibility_off" : "visibility"
+                    }}</mat-icon>
+                  </button>
+                </mat-form-field>
+                <p class="text-center">
+                  Don't have an account?
+                  <a href="" class="mat-pink" routerLink="/register-user"
+                    >Sign Up</a
+                  >
+                </p>
+                <button
+                  mat-raised-button
+                  class="mat-pink my-2"
+                  (click)="signIn(email.value, password.value)"
+                >
+                  Login
+                </button>
+              </div>
+            </mat-grid-tile>
+          </mat-grid-list>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+</div>
