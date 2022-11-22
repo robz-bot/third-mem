@@ -3,51 +3,72 @@
     <i class="bi bi-badge-tm-fill"></i> Third Mem
     <i class="bi bi-image-alt"></i>
   </h1>
-
   <span class="example-spacer"></span>
-  <button
-    mat-icon-button
-    class="example-icon favorite-icon"
-    matTooltip="Home"
-    aria-label="Example icon-button with heart icon"
-    routerLink="/dashboard"
-  >
-    <mat-icon>home</mat-icon>
-  </button>
-  <button
-    mat-icon-button
-    class="example-icon favorite-icon"
-    matTooltip="Memory List"
-    aria-label="Example icon-button with heart icon"
-    routerLink="/memories"
-  >
-    <mat-icon>list</mat-icon>
-  </button>
-  <button
-    mat-icon-button
-    class="example-icon favorite-icon"
-    matTooltip="New Event"
-    aria-label="Example icon-button with heart icon"
-    routerLink="/new-event"
-  >
-    <mat-icon>event</mat-icon>
-  </button>
-  <button
-    mat-icon-button
-    class="example-icon favorite-icon"
-    matTooltip="New Memory"
-    aria-label="Example icon-button with heart icon"
-    routerLink="/new-mem"
-  >
-    <mat-icon>image</mat-icon>
-  </button>
-  <button
-    mat-icon-button
-    class="example-icon favorite-icon"
-    matTooltip="Sign Out"
-    aria-label="Example icon-button with heart icon"
-    (click)="signOut()"
-  >
-    <mat-icon>logout</mat-icon>
-  </button>
+
+
+  <div class="d-block d-lg-none">
+    <span class="example-spacer"></span>
+    <button
+      mat-raised-button
+      (click)="openMobileViewMenus()"
+      class="card-title text-center mat-pink"
+    >
+      Menus
+    </button>
+  </div>
+
+  <div class="d-none d-lg-block">
+    <span class="example-spacer"></span>
+    <button
+      mat-icon-button
+      class="example-icon favorite-icon"
+      matTooltip="Home"
+      aria-label="Example icon-button with heart icon"
+      routerLink="/dashboard"
+    >
+      <mat-icon>home</mat-icon>
+    </button>
+    <button
+      mat-icon-button
+      class="example-icon favorite-icon"
+      matTooltip="Memory List"
+      aria-label="Example icon-button with heart icon"
+      routerLink="/memories"
+    >
+      <mat-icon>list</mat-icon>
+    </button>
+    <button
+      mat-icon-button
+      class="example-icon favorite-icon"
+      matTooltip="New Event"
+      aria-label="Example icon-button with heart icon"
+      routerLink="/new-event"
+    >
+      <mat-icon>event</mat-icon>
+    </button>
+    <button
+      mat-icon-button
+      class="example-icon favorite-icon"
+      matTooltip="New Memory"
+      aria-label="Example icon-button with heart icon"
+      routerLink="/new-mem"
+    >
+      <mat-icon>image</mat-icon>
+    </button>
+    <button
+      mat-icon-button
+      class="example-icon favorite-icon"
+      matTooltip="Sign Out"
+      aria-label="Example icon-button with heart icon"
+      (click)="signOut()"
+    >
+      <mat-icon>logout</mat-icon>
+    </button>
+  </div>
 </mat-toolbar>
+<div class="container">
+  <h4 class="card-title text-end">
+    Hi ! {{ userData.email.split("@")[0] }} 👋
+  </h4>
+</div>
+

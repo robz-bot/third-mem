@@ -52,6 +52,10 @@ import { DeleteNewMemDialogComponent } from './pages/delete-new-mem-dialog/delet
 import { MatDialogModule } from '@angular/material/dialog';
 import { NewMemImageDialogComponent } from './pages/new-mem-image-dialog/new-mem-image-dialog.component';
 import { EventsComponent } from './pages/events/events.component';
+import { MatBottomSheetModule } from '@angular/material/bottom-sheet';
+import { MatListModule } from '@angular/material/list';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MobileViewMenusComponent } from './shared-components/mobile-view-menus/mobile-view-menus.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -69,6 +73,7 @@ import { EventsComponent } from './pages/events/events.component';
     DeleteNewMemDialogComponent,
     NewMemImageDialogComponent,
     EventsComponent,
+    MobileViewMenusComponent,
   ],
   imports: [
     BrowserModule,
@@ -99,6 +104,9 @@ import { EventsComponent } from './pages/events/events.component';
     MatPaginatorModule,
     MatDialogModule,
     MatSortModule,
+    MatSidenavModule,
+    MatBottomSheetModule,
+    MatListModule,
   ],
   providers: [
     AuthenticationService,
