@@ -59,7 +59,7 @@ export class DashboardComponent implements OnInit {
         this.dataSource.sort = this.sort;
       },
       (err) => {
-        console.log('Error in fetching results');
+        //console.log('Error in fetching results');
       }
     );
   }

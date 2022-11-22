@@ -32,12 +32,12 @@ export class AuthenticationService {
       if (user) {
         this.userData = user;
         localStorage.setItem('user', JSON.stringify(this.userData));
-        JSON.parse(localStorage.getItem('user')!);
+        // JSON.parse(localStorage.getItem('user')!);
         //Redirect to local
         this.router.navigateByUrl('/dashboard');
       } else {
         localStorage.setItem('user', 'null');
-        JSON.parse(localStorage.getItem('user')!);
+        // JSON.parse(localStorage.getItem('user')!);
       }
     });
   }
@@ -64,7 +64,7 @@ export class AuthenticationService {
     this.angularFireAuth
       .createUserWithEmailAndPassword(email, password)
       .then((res: any) => {
-        console.log('You are Successfully signed up!', res);
+        //console.log('You are Successfully signed up!', res);
         /* Call the SendVerificaitonMail() function when new user sign
         up and returns promise */
         this.SendVerificationMail();
@@ -72,7 +72,7 @@ export class AuthenticationService {
         this.snackbar.openSnackBar('You have been registered successfully!');
       })
       .catch((error: { message: any; code: any }) => {
-        console.log('Something is wrong:', error.message);
+        //console.log('Something is wrong:', error.message);
         this.displayErrrMsg(error.code);
       });
   }
@@ -83,21 +83,23 @@ export class AuthenticationService {
       .signInWithEmailAndPassword(email, password)
       .then((res: any) => {
         this.angularFireAuth.authState.subscribe((user) => {
-          if (!user?.emailVerified) {
-            this.snackbar.openSnackBar('Your Email has not verified yet!');
-            this.router.navigate(['verify-email-address']);
-            return
-          }
-          if (user) {
-            this.snackbar.openSnackBar('Your login was successful!');
-            console.log(res);
-            this.router.navigateByUrl('/dashboard');
+          if (user != null) {
+            if (!user?.emailVerified) {
+              //console.log('inside signin - email verfied?');
+              console.log(!user?.emailVerified);
+              this.snackbar.openSnackBar('Your Email has not verified yet!');
+              this.router.navigateByUrl('/verify-email-address');
+            } else {
+              this.snackbar.openSnackBar('Your login was successful!');
+              console.log(res);
+              this.router.navigateByUrl('/dashboard');
+            }
           }
         });
         this.SetUserData(res.user);
       })
       .catch((error: { message: any; code: any }) => {
-        console.log('Something is wrong:', error.message);
+        //console.log('Something is wrong:', error.message);
         this.displayErrrMsg(error.code);
       });
   }
@@ -123,9 +125,9 @@ export class AuthenticationService {
 
   /* Sign out */
   SignOut() {
-    console.log("signout")
+    //console.log('signout');
     return this.angularFireAuth.signOut().then((res) => {
-      console.log(res)
+      console.log(res);
       localStorage.removeItem('user');
       this.router.navigateByUrl('/sign-in');
     });

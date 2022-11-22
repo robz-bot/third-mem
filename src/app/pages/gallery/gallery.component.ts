@@ -76,7 +76,7 @@ export class GalleryComponent implements OnInit {
         this.dataSource.sort = this.sort;
       },
       (err) => {
-        console.log('Error in fetching results');
+        //console.log('Error in fetching results');
       }
     );
   }
@@ -102,7 +102,7 @@ export class GalleryComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe((result) => {
-      console.log('Deleted');
+      //console.log('Deleted');
       console.log(result);
     });
   }
@@ -118,7 +118,7 @@ export class GalleryComponent implements OnInit {
   }
 
   deleteMem(id: string) {
-    console.log('Delete ID: ' + this.collectionName + '/' + id);
+    //console.log('Delete ID: ' + this.collectionName + '/' + id);
     this.firestore.collection(this.collectionName).doc(id).delete();
     this.getAllDocs();
   }
