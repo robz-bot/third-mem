@@ -1,68 +1,24 @@
 <app-header></app-header>
 <div class="container my-3">
   <mat-card
-    class="d-flex align-items-center justify-content-center mat-card-form"
+    class="w-100 d-flex align-items-center justify-content-center mat-card-form"
   >
-    <mat-card-content>
+    <mat-card-content class="w-100">
       <h2 class="text-dark text-center">
-        New Memory <i class="bi bi-camera"></i>
+        New Event <i class="bi bi-calendar-event"></i>
       </h2>
-      <!-- Large screen -->
-      <img
-        [src]="imgSrc"
-        width="500px"
-        height="400px"
-        class="d-none d-lg-block"
-      />
-      <!-- Medium Screen  -->
-      <img
-        [src]="imgSrc"
-        width="300px"
-        height="300px"
-        class="d-none d-md-block d-lg-none"
-      />
-      <!-- Small Screen -->
-      <img
-        [src]="imgSrc"
-        width="300px"
-        height="300px"
-        class="d-block d-sm-none"
-      />
       <form
         class="text-dark d-flex flex-column"
         [formGroup]="formTemplate"
         (submit)="onSubmit(formTemplate.value)"
       >
-        <mat-form-field appearance="outline" class="my-2">
-          <mat-label class="text-dark"
-            >Select Pic (Accept only PNG, JPEG Format)</mat-label
-          >
-          <input type="text" readonly matInput #selFile />
-          <input
-            type="file"
-            multiple
-            #f_input
-            formControlName="imageUrl"
-            (change)="showPreview($event)"
-            accept="image/png, image/jpeg"
-          />
-        </mat-form-field>
         <mat-form-field class="example-full-width" appearance="fill">
-          <mat-label class="text-dark">Occasion</mat-label>
+          <mat-label class="text-dark">Event Name</mat-label>
           <input
             type="text"
             matInput
-            formControlName="occasion"
-            [matAutocomplete]="auto"
+            formControlName="eventName"
           />
-          <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
-            <mat-option
-              *ngFor="let option of filteredOptions | async"
-              [value]="option"
-            >
-              {{ option }}
-            </mat-option>
-          </mat-autocomplete>
         </mat-form-field>
         <mat-form-field appearance="fill">
           <mat-label class="text-dark">Choose a date</mat-label>
@@ -92,7 +48,7 @@
         <div class="row">
           <div class="col-sm-12 col-md-6 col-lg-6 text-center">
             <button mat-raised-button type="submit" class="mat-pink my-2">
-              Create Memory
+              Create Event
               <span class="spinner-border mx-2" *ngIf="loader"></span>
             </button>
           </div>

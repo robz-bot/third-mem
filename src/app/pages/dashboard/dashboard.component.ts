@@ -1,10 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
 import { map } from 'rxjs';
 import { getStorage, ref, listAll } from 'firebase/storage';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 import { ImageService } from 'src/app/services/image.service';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material/table';
 
 @Component({
   selector: 'app-dashboard',
@@ -18,39 +21,55 @@ export class DashboardComponent implements OnInit {
     private storage: AngularFireStorage,
     private firestore: AngularFirestore
   ) {}
-  filelist: any[] = [];
-  newMemArray: any[] = [];
-  ngOnInit(): void {
-    const collectionRef = this.firestore.collection('new-mem');
-    const collectionInstance = collectionRef.valueChanges();
-    collectionInstance.subscribe((res: any) => {
-      this.newMemArray = res;
-      console.log(this.newMemArray)
-    });
+  displayedColumns: string[] = [
+    'Id',
+    'eventName',
+    'Date',
+    'Location',
+    'CreatedBy',
+    'Options',
+  ];
+  dataSource!: MatTableDataSource<any>;
 
-  //   const userData = JSON.parse(localStorage.getItem('user')!);
-  //   const storage = getStorage();
-  //   const ref = this.storage.ref('Team Lunch');
-  //   ref.listAll().subscribe((data) => {
-  //     for (let i = 0; i < data.items.length; i++) {
-  //       console.log(data.items[i]);
-  //       let fullPath = data.items[i].fullPath;
-  //       let newref = this.storage
-  //         .ref(fullPath)
-  //         .getDownloadURL()
-  //         .subscribe((data: any) => {
-  //           console.log(data);
-  //           this.filelist.push({
-  //             name: fullPath,
-  //             url: data,
-  //           });
-  //         });
-  //     }
-  //     console.log(this.filelist);
-  //   });
-  // }
-  // imageList: any[] = [];
-  // rowIndexArray: any[] = [];
-  // collection: any;
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
+  ngOnInit(): void {}
+
+  ngAfterViewInit() {
+    this.getAllDocs()
+  }
+
+  newEventArray: any[] = [];
+  collectionName: string = 'events';
+  getAllDocs() {
+    const collectionRef = this.firestore.collection(this.collectionName);
+
+    collectionRef.snapshotChanges().subscribe(
+      (res: any) => {
+        this.newEventArray = res.map((e: any) => {
+          console.log(e);
+          const data = e.payload.doc.data();
+          data.id = e.payload.doc.id;
+          console.log(data);
+          return data;
+        });
+
+        this.dataSource = new MatTableDataSource(this.newEventArray);
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
+      },
+      (err) => {
+        console.log('Error in fetching results');
+      }
+    );
+  }
+
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
+    }
   }
 }

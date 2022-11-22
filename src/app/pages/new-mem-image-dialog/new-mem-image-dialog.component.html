@@ -1,8 +1,18 @@
-<h2 mat-dialog-title>{{data.item.occasion}}</h2>
+<h2 mat-dialog-title class="text-center">
+  🎉 {{ data.item.occasion }} at {{ data.item.location }} on
+  {{ data.item.date.split("00:00:00")[0] }} 🎉
+</h2>
 <mat-dialog-content class="mat-typography">
-
-<img [src]="data.item.image" class="w-100 h-100">
+  <p class="my-2">{{ data.item.description }}</p>
+  <div class="my-3 text-end">
+    <span class="h5">
+      <span class="badge bg-info">
+        {{ data.item.email.split("@")[0] }}</span
+      ></span
+    >
+  </div>
+  <img [src]="data.item.image" class="w-100 h-100" />
 </mat-dialog-content>
-<mat-dialog-actions class="float-end">
-  <button mat-button mat-dialog-close class="bg-info text-center">Cool</button>
+<mat-dialog-actions class="d-flex align-items-center justify-content-center">
+  <button mat-button mat-dialog-close class="bg-info">Cool 😎</button>
 </mat-dialog-actions>

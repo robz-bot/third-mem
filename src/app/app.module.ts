@@ -51,6 +51,7 @@ import { MatSortModule } from '@angular/material/sort';
 import { DeleteNewMemDialogComponent } from './pages/delete-new-mem-dialog/delete-new-mem-dialog.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { NewMemImageDialogComponent } from './pages/new-mem-image-dialog/new-mem-image-dialog.component';
+import { EventsComponent } from './pages/events/events.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -67,6 +68,7 @@ import { NewMemImageDialogComponent } from './pages/new-mem-image-dialog/new-mem
     SecDatePipe,
     DeleteNewMemDialogComponent,
     NewMemImageDialogComponent,
+    EventsComponent,
   ],
   imports: [
     BrowserModule,

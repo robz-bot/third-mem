@@ -45,6 +45,8 @@ export class NewMemComponent implements OnInit {
     date: new FormControl(''),
     occasion: new FormControl(''),
     imageUrl: new FormControl(''),
+    description: new FormControl(''),
+    location: new FormControl(''),
   });
 
   showPreview(event: any) {
@@ -87,6 +89,23 @@ export class NewMemComponent implements OnInit {
       this.snackBar.openSnackBar('Date is required!');
       return;
     }
+    if (
+      formValue.location == '' ||
+      formValue.location == null ||
+      formValue.location == undefined
+    ) {
+      this.snackBar.openSnackBar('Location is required!');
+      return;
+    }
+    if (
+      formValue.description == '' ||
+      formValue.description == null ||
+      formValue.description == undefined
+    ) {
+      this.snackBar.openSnackBar('Description is required!');
+      return;
+    }
+
 
     // if (this.formTemplate.valid) {
     var filePath = `${formValue.occasion}/${this.selectedImage.name
@@ -113,6 +132,8 @@ export class NewMemComponent implements OnInit {
                 createdBy: this.userData.uid,
                 email: this.userData.email,
                 id: this.firestore.createId(),
+                description: formValue.description,
+                location: formValue.location
               })
               .then((res) => {
                 this.loader = false;
@@ -139,6 +160,8 @@ export class NewMemComponent implements OnInit {
       date: '',
       imageUrl: '',
       occasion: '',
+      description: '',
+      location: '',
     });
     this.imgSrc = '/assets/img/img_click.png';
     this.selectedImage = null;

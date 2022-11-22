@@ -37,6 +37,7 @@ export class GalleryComponent implements OnInit {
     'postedby',
     'date',
     'occasion',
+    'location',
     'buttons',
   ];
   dataSource!: MatTableDataSource<any>;
@@ -47,7 +48,11 @@ export class GalleryComponent implements OnInit {
   @ViewChild(MatSort)
   sort!: MatSort;
 
-  ngOnInit(): void {}
+  userData:any
+  ngOnInit(): void {
+    this.userData = JSON.parse(localStorage.getItem('user')!);
+    console.log(this.userData)
+  }
 
   ngAfterViewInit() {
     this.getAllDocs();
@@ -74,25 +79,12 @@ export class GalleryComponent implements OnInit {
         console.log('Error in fetching results');
       }
     );
-
-    // const collectionInstance = collectionRef.valueChanges();
-    // collectionInstance.subscribe((res: any) => {
-    //   this.newMemArray = res;
-    //   // console.log(this.newMemArray);
-    //   this.dataSource = new MatTableDataSource(res);
-    //   // console.log(this.paginator);
-    //   this.dataSource.paginator = this.paginator;
-    //   // console.log(this.dataSource);
-    //   this.dataSource.sort = this.sort;
-    // });
   }
 
   applyFilter(event: Event) {
     console.log(event.target);
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
-    // console.log(this.dataSource);
-    // console.log(this.dataSource.filter);
 
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
@@ -105,7 +97,7 @@ export class GalleryComponent implements OnInit {
 
   openDialog(id: string): void {
     const dialogRef = this.dialog.open(DeleteNewMemDialogComponent, {
-      width: '250px',
+      width: '500px',
       data: { id: id },
     });
 
@@ -127,7 +119,6 @@ export class GalleryComponent implements OnInit {
 
   deleteMem(id: string) {
     console.log('Delete ID: ' + this.collectionName + '/' + id);
-    // this.firestore.doc('/' + this.collectionName + '/' + id).delete();
     this.firestore.collection(this.collectionName).doc(id).delete();
     this.getAllDocs();
   }
