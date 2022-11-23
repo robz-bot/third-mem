@@ -48,10 +48,10 @@ export class GalleryComponent implements OnInit {
   @ViewChild(MatSort)
   sort!: MatSort;
 
-  userData:any
+  userData: any;
   ngOnInit(): void {
     this.userData = JSON.parse(localStorage.getItem('user')!);
-    console.log(this.userData)
+    console.log(this.userData);
   }
 
   ngAfterViewInit() {
@@ -98,7 +98,12 @@ export class GalleryComponent implements OnInit {
   openDialog(id: string): void {
     const dialogRef = this.dialog.open(DeleteNewMemDialogComponent, {
       width: '500px',
-      data: { id: id },
+      data: {
+        id: id,
+        deleteFor: 'mem',
+        deleteForTitle: 'Delete Memory',
+        deleteForDesc: 'Would you like to delete this Memory?',
+      },
     });
 
     dialogRef.afterClosed().subscribe((result) => {

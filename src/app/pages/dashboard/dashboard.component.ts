@@ -8,6 +8,8 @@ import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+import { DeleteNewMemDialogComponent } from '../delete-new-mem-dialog/delete-new-mem-dialog.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-dashboard',
@@ -19,7 +21,7 @@ export class DashboardComponent implements OnInit {
     public authService: AuthenticationService,
     private imageService: ImageService,
     private storage: AngularFireStorage,
-    private firestore: AngularFirestore
+    private firestore: AngularFirestore,public dialog: MatDialog
   ) {}
   displayedColumns: string[] = [
     'Id',
@@ -33,7 +35,9 @@ export class DashboardComponent implements OnInit {
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
-  ngOnInit(): void {}
+  userData: any;
+  ngOnInit(): void {
+    this.userData = JSON.parse(localStorage.getItem('user')!);}
 
   ngAfterViewInit() {
     this.getAllDocs()
@@ -71,5 +75,23 @@ export class DashboardComponent implements OnInit {
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
     }
+  }
+
+  openDialog(id: string): void {
+    const dialogRef = this.dialog.open(DeleteNewMemDialogComponent, {
+      width: '500px',
+      data: {
+        id: id,
+        deleteFor: 'event',
+        deleteForTitle: 'Delete Event',
+        deleteForDesc: 'Would you like to delete this Event?',
+      },
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      //console.log('Deleted');
+      console.log(result);
+      this.getAllDocs()
+    });
   }
 }

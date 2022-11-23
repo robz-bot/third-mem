@@ -134,26 +134,71 @@ export class AuthenticationService {
   }
 
   displayErrrMsg(code: any) {
-    if (code == 'auth/email-already-in-use') {
-      this.snackbar.openSnackBar(
-        'This email address is in use already. Try a different one!'
-      );
+    let message: string;
+
+    switch (code) {
+      case 'auth/wrong-password':
+        message = 'Invalid login credentials.';
+        break;
+      case 'auth/network-request-failed':
+        message = 'Please check your internet connection';
+        break;
+      case 'auth/too-many-requests':
+        message =
+          'We have detected too many requests from your device. Take a break please!';
+        break;
+      case 'auth/user-disabled':
+        message =
+          'Your account has been disabled or deleted. Please contact the system administrator.';
+        break;
+      case 'auth/requires-recent-login':
+        message = 'Please login again and try again!';
+        break;
+      case 'auth/email-already-exists':
+        message = 'Email address is already in use by an existing user.';
+        break;
+      case 'auth/user-not-found':
+        message =
+          'We could not find user account associated with the email address.';
+        break;
+      case 'auth/phone-number-already-exists':
+        message = 'The phone number is already in use by an existing user.';
+        break;
+      case 'auth/invalid-phone-number':
+        message = 'The phone number is not a valid phone number!';
+        break;
+      case 'auth/invalid-email  ':
+        message = 'The email address is not a valid email address!';
+        break;
+      case 'auth/cannot-delete-own-user-account':
+        message = 'You cannot delete your own user account.';
+        break;
+       default:
+        message = 'Oops! Something went wrong. Try again later.';
+        break;
     }
-    if (code == 'auth/invalid-email') {
-      this.snackbar.openSnackBar('Ambiguous email. Try a valid one!');
-    }
-    if (code == 'auth/weak-password') {
-      this.snackbar.openSnackBar('Poor Password Try a more powerful one!');
-    }
-    if (code == 'auth/wrong-password') {
-      this.snackbar.openSnackBar(
-        'The password is invalid, or the user does not have a password!'
-      );
-    }
-    if (code == 'auth/user-not-found') {
-      this.snackbar.openSnackBar(
-        'There is no user record corresponding to this identifier. The user may have been deleted! '
-      );
-    }
+
+    this.snackbar.openSnackBar(message);
+    // if (code == 'auth/email-already-in-use') {
+    //   this.snackbar.openSnackBar(
+    //     'This email address is in use already. Try a different one!'
+    //   );
+    // }
+    // if (code == 'auth/invalid-email') {
+    //   this.snackbar.openSnackBar('Ambiguous email. Try a valid one!');
+    // }
+    // if (code == 'auth/weak-password') {
+    //   this.snackbar.openSnackBar('Poor Password Try a more powerful one!');
+    // }
+    // if (code == 'auth/wrong-password') {
+    //   this.snackbar.openSnackBar(
+    //     'The password is invalid, or the user does not have a password!'
+    //   );
+    // }
+    // if (code == 'auth/user-not-found') {
+    //   this.snackbar.openSnackBar(
+    //     'There is no user record corresponding to this identifier. The user may have been deleted! '
+    //   );
+    // }
   }
 }

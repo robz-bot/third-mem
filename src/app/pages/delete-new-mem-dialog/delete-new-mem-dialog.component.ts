@@ -20,9 +20,15 @@ export class DeleteNewMemDialogComponent implements OnInit {
   }
   ngOnInit(): void {
   }
-  collectionName: string = 'new-mem';
+  memCollectionName: string = 'new-mem';
+  eventCollectionName: string = 'events';
   deleteNewMem(){
-    this.firestore.collection(this.collectionName).doc(this.data.id).delete();
+    console.log("dele")
+    if(this.data.deleteFor == "mem"){
+      this.firestore.collection(this.memCollectionName).doc(this.data.id).delete();
+    }else if(this.data.deleteFor == "event"){
+      this.firestore.collection(this.eventCollectionName).doc(this.data.id).delete();
+    }
 
   }
 }

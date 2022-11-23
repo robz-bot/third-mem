@@ -2,9 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
 import { FormGroup, FormControl } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 import { map, Observable, startWith } from 'rxjs';
 import { ImageService } from 'src/app/services/image.service';
 import { SnackbarService } from 'src/app/services/snackbar.service';
+import { DeleteNewMemDialogComponent } from '../delete-new-mem-dialog/delete-new-mem-dialog.component';
 
 @Component({
   selector: 'app-events',
